@@ -25,7 +25,7 @@ Time spent: `8`
 - [ ] Add a search bar: pretty simple implementation of searching against the existing table view data.
 
 ### Walkthrough
-![Video Walkthrough]()
+![Video Walkthrough](https://raw.githubusercontent.com/davidtongbox/RottenTomato/master/rottentomato.gif)
 
 ### Known Issues
 - Icon View is currently incomplete. UICollectionViewCell is not configured to show. It should be trivial to fix this issue.
