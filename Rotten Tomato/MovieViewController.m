@@ -13,7 +13,7 @@
 #import "SVProgressHUD.h"
 #import "MovieDetailViewController.h"
 
-@interface MovieViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface MovieViewController () <UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -32,6 +32,8 @@
     // Do any additional setup after loading the view from its nib.
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
     
     [self.tableView registerNib:[UINib nibWithNibName:@"MovieCell" bundle:nil] forCellReuseIdentifier:@"MovieCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"MovieCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"MovieCollectionCell"];
@@ -44,10 +46,12 @@
     [self.refreshControl addTarget:self action:@selector(onRefresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     
+    /*
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:CGSizeMake(200, 200)];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     [self.collectionView setCollectionViewLayout:flowLayout];
+    */
     
     [self onRefresh];
 }
@@ -66,6 +70,7 @@
             //NSLog(@"response: %@", responseDictionary);
             self.movies = responseDictionary[@"movies"];
             [self.tableView reloadData];
+            [self.collectionView reloadData];
             
             [SVProgressHUD dismiss];
             
@@ -95,27 +100,13 @@
     
     MovieCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"MovieCollectionCell" forIndexPath:indexPath];
     
+    
     NSDictionary *movie = self.movies[indexPath.row];
     
     NSString *url = [movie valueForKeyPath:@"posters.thumbnail"];
-    [cell.posterIconView setImageWithURL:[NSURL URLWithString:url]];
+    [cell.largePosterView setImageWithURL:[NSURL URLWithString:url]];
     
     return cell;
-    
-    /*
-    NSString *cellData = @"...";
-    
-    static NSString *cellIdentifier = @"MovieCollectionCell";
-    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    UILabel *titleLabel = (UILabel *)[cell viewWithTag:100];
-    
-    [titleLabel setText:cellData];
-    [cell setBackgroundColor:[UIColor blueColor]];
-    
-    return cell;
-    */
 }
 
 #pragma mark - Table methods

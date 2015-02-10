@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MovieCollectionCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *posterIconView;
+@property (weak, nonatomic) IBOutlet UIImageView *largePosterView;
 
 @end
