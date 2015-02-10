@@ -23,12 +23,13 @@ Time spent: `8`
 - [ ] Customize the navigation bar.
 - [ ] Add a tab bar for Box Office and DVD.
 - [ ] Add a search bar: pretty simple implementation of searching against the existing table view data.
+- [x] Icon View and List View
 
 ### Walkthrough
 ![Video Walkthrough](https://raw.githubusercontent.com/davidtongbox/RottenTomato/master/rottentomato.gif)
 
 ### Known Issues
-- Icon View is currently incomplete. UICollectionViewCell is not configured to show. It should be trivial to fix this issue.
+- Icon View lacks high res images and scroll to refresh.
 
 
 Credits
